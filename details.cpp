@@ -5,16 +5,19 @@ class node;
 node *start=NULL;
 class node{    
     string name, src, dest;
-    int age, cont, days, budget;    
+    long int cont;
+    int age, days, budget;    
     node *next;    
     public:    
+
     node *create_node(){        
         node *temp;
         temp=new(node);        
         temp->next=(NULL);         
          return(temp);    
-    }    
-    void insert(string n, int d, int x, int y, int z, string a, string b){        
+    } 
+
+    void insert(string n, int d, long int x, int y, int z, string a, string b){        
         node *newnode, *temp;        
         newnode=create_node();        
         newnode->name=n;
@@ -36,56 +39,51 @@ class node{
         newnode->next=NULL;        
         return;    
     }    
-    void del(){        
-        int pos, i=1;        
-        node *temp3, *temp1, *temp2;        
-        temp1=start;        
-        cout<<"Enter the position: ";        
-        cin>>pos;        
-        if(start==NULL){            
-            cout<<"List is empty\n";            
-            return;        
-        }        
-        while(i<pos-1){            
-            temp1=temp1->next;            
-            i++;        
-        }        
-        if(temp1==start){
-            temp2=temp1;            
-            temp2=temp2->next;            
-            start=temp2;            
-            delete(temp1);            
-            return;        
-        }        
-        if(temp1->next->next==NULL){            
-            temp2=temp1->next;            
-            temp1->next=NULL;            
-            delete(temp2);            
-            return;        
-        }        
-        temp3=temp1->next;        
-        temp2=temp1->next->next;        
-        temp1->next=temp2;        
-        delete(temp3);        
-        return;    
-    }    
-    //void display(){        
-        //node *temp;        
-        //temp=start;
-        //cout<<"The elements of the list are: \n";        
-        //while(temp->next!=NULL){            
-            //cout<<temp->info<<" ";            
-            //temp=temp->next;        
-        //}        
-        //cout<<temp->info<<endl;    
-    //}
+
+    int tourDays(){
+        node *temp;
+        temp = start;
+        while(temp != NULL){
+            return temp->days;
+            temp=temp->next;
+        }
+        return 0;
+    }
+    int budgetDisplay(){
+        node *temp;
+        temp = start;
+        while(temp != NULL){
+            return temp->budget;
+            temp=temp->next;
+        }
+        return 0;
+    }
+    string startNode(){
+        node *temp;
+        temp = start;
+        while(temp != NULL){
+            return temp->src;
+            temp=temp->next;
+        }
+        return 0;
+    }
+    string endNode(){
+        node *temp;
+        temp = start;
+        while(temp != NULL){
+            return temp->dest;
+            temp=temp->next;
+        }
+        return 0;
+    }
 };
         
         
 void user_details(){    
     node n;    
     string a, f, g;
-    int ch,b,c,d, e;              
+    long int c;
+    int ch,b,d, e;              
     cout<<"Enter your name: ";  
     cin>>a;
     cout<<"Enter your age: ";  
@@ -102,4 +100,14 @@ void user_details(){
     cin>>g;
     n.insert(a,b, c, d, e, f, g);
     cout<<endl;
+}
+
+int checkBudget(int x, int y){
+    if(x<=y){
+        cout<<"This tour is suitable for you\n";
+        return 0;
+    }else{
+        cout<<"The tour cost exceeds your budget\n";
+        return -1;
+    }
 }
